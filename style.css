@@ -1,0 +1,259 @@
+* {
+  font-family: "Nerko One", cursive;
+  font-family: "Roboto Mono", monospace;
+}
+*,
+*::after,
+*::before {
+  box-sizing: border-box;
+}
+
+:root {
+  --cell-size: 100px;
+  --mark-size: calc(var(--cell-size) * 0.9);
+}
+
+body {
+  margin: 0;
+  background: #e5eaf5c0;;
+}
+
+nav{
+  background-color: #250925;
+  color: white;
+  height: 65px;
+  font-size: 20px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 0 12px;
+  font-family: 'Roboto', sans-serif;
+}
+
+nav ul{
+  list-style-type: none;
+}
+
+.gameContainer{ 
+  display: flex;
+  justify-content: center;
+  margin-top: 30px;
+  flex-wrap: wrap;
+}
+
+#info {
+  right: 50px;
+  font-size: 22px;
+  font-weight: 300 bolder;
+
+}
+
+.gameInfo{
+  left: 2500px;
+  bottom: 250px;
+  padding: 0 34px;
+  font-family: 'Baloo Bhaina 2', cursive;
+}
+
+.gameInfo h1{
+  font-size: 2.5rem;
+}
+
+#reset {
+  position: relative;
+  right: 320px;
+  margin: 1rem;
+  padding: 5px 10px;
+  font-size: 1rem;
+  font-family: 'Roboto', sans-serif;
+  border: 1px solid black;
+  background: #ffffff;
+  cursor: pointer;
+
+}
+
+#reset:hover{
+  background-color: #884bc9;
+  color: white;
+  border-color: white;
+}
+
+.board {
+  padding-top: 8%;
+  width: 100vw;
+  height: 50vh;
+  display: grid;
+  justify-content: center;
+  align-content: center;
+  justify-items: center;
+  align-items: center;
+  grid-template-columns: repeat(3, auto);
+}
+
+.cell {
+  width: var(--cell-size);
+  height: var(--cell-size);
+  border: 2px solid black;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  position: relative;
+  cursor: pointer;
+}
+
+.cell:first-child,
+.cell:nth-child(2),
+.cell:nth-child(3) {
+  border-top: none;
+}
+
+.cell:nth-child(3n + 1) {
+  border-left: none;
+}
+
+.cell:nth-child(3n + 3) {
+  border-right: none;
+}
+
+.cell:last-child,
+.cell:nth-child(8),
+.cell:nth-child(7) {
+  border-bottom: none;
+}
+
+.cell.x,
+.cell.circle {
+  cursor: not-allowed;
+}
+
+.cell.x::before,
+.cell.x::after,
+.cell.circle::before {
+  background-color: #884bc9;
+}
+
+.board.x .cell:not(.x):not(.circle):hover::before,
+.board.x .cell:not(.x):not(.circle):hover::after,
+.board.circle .cell:not(.x):not(.circle):hover::before {
+  background-color: lightgray;
+}
+
+.cell.x::before,
+.cell.x::after,
+.board.x .cell:not(.x):not(.circle):hover::before,
+.board.x .cell:not(.x):not(.circle):hover::after {
+  content: "";
+  position: absolute;
+  width: calc(var(--mark-size) * 0.15);
+  height: var(--mark-size);
+}
+
+.cell.x::before,
+.board.x .cell:not(.x):not(.circle):hover::before {
+  transform: rotate(45deg);
+}
+
+.cell.x::after,
+.board.x .cell:not(.x):not(.circle):hover::after {
+  transform: rotate(-45deg);
+}
+
+.cell.circle::before,
+.cell.circle::after,
+.board.circle .cell:not(.x):not(.circle):hover::before,
+.board.circle .cell:not(.x):not(.circle):hover::after {
+  content: "";
+  position: absolute;
+  border-radius: 50%;
+}
+
+.cell.circle::before,
+.board.circle .cell:not(.x):not(.circle):hover::before {
+  width: var(--mark-size);
+  height: var(--mark-size);
+}
+
+.cell.circle::after,
+.board.circle .cell:not(.x):not(.circle):hover::after {
+  width: calc(var(--mark-size) * 0.7);
+  height: calc(var(--mark-size) * 0.7);
+  background-color: #e9baff;
+}
+
+.winning-message {
+  display: none;
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: rgba(0, 0, 0, 0.9);
+  justify-content: center;
+  align-items: center;
+  color: #ffed2b;
+  font-size: 5rem;
+  flex-direction: column;
+}
+
+.winning-message button {
+  font-size: 3rem;
+  background-color: white;
+  border: 1px solid black;
+  padding: 0.25em 0.5em;
+  cursor: pointer;
+}
+
+.winning-message button:hover {
+  background-color: #884bc9;
+  color: white;
+  border-color: white;
+}
+
+.winning-message.show {
+  display: flex;
+}
+
+
+@media (max-width: 412px) {
+  .gameContainer {
+    flex-direction: column;
+    align-items: center;
+  }
+  .container {
+    flex-direction: column;
+    align-items: center;
+  }
+   #reset {
+    margin: 10px auto;
+    padding: 10px 15px;
+    font-size: 1rem;
+    display: block;
+    position: static;
+    text-align: center;
+  }
+  .board {
+    width: auto;
+    height: auto;
+  }
+  .winning-message {
+    font-size: 3rem;
+  }
+  #info {
+    font-size: 1.2rem;
+  }
+  nav{
+    font-size: 15px;
+    text-align: center;
+  }
+}
+
+@media (max-width: 805px){
+  #reset {
+    margin: 10px auto;
+    padding: 10px 15px;
+    font-size: 1rem;
+    display: block;
+    position: static;
+    text-align: center;
+  }
+}
